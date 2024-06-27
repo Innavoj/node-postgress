@@ -2,6 +2,10 @@
     "version": 2,
     "builds": [
       {
+        "src": "package.json",
+        "use": "vercel-sapper"
+      },
+      {
         "src": "./index.js",
         "use": "@vercel/node"
       }
@@ -9,7 +13,7 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "./src/router"
+        "dest": "./index.js"
       }
     ]
 }
