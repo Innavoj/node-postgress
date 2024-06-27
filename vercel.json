@@ -8,9 +8,13 @@
       }
     ],
     "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "./src/router"
-      }
+      { "src": "/api", "dest": "./src/router/animalRouter.js" },
+      { "src": "/api", "dest": "./src/router/archivoRouter.js" },
+      { "src": "/api", "dest": "./src/router/citaRouter.js" },
+      { "src": "/api", "dest": "./src/router/consultaRouter.js" },
+      { "src": "/api", "dest": "./src/router/entidadRouter.js" },
+      { "src": "/api", "dest": "./src/router/facturaRouter.js" },
+      { "src": "/api", "dest": "./src/router/msgRouter.js" },
+      { "src": "/api", "dest": "./src/router/propietarioRouter.js" }
     ]
 }
