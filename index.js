@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-//const router = express.Router();
+const router = express.Router();
 const dotenv = require("dotenv");
 require ('./src/server/database');
 const apiEntidad  = require('./src/router/entidadRouter');
@@ -15,6 +15,7 @@ const apiFactura = require('./src/router/facturaRouter');
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({ extends: false}));
 app.use(express.json());
+app.use(router);
 
 app.use('/api', apiEntidad);
 app.use('/api', apiAnimal);
@@ -37,3 +38,4 @@ app.listen(process.env.PORT, () =>  console.log('Servidor WEB Conectado en el pu
 
  
 module.exports = dotenv;
+module.exports = app;
