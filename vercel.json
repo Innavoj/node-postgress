@@ -12,6 +12,6 @@
       }
     ],
     "routes": [
-      { "src": "/api/animal", "dest": "./src/router/animalRouter.js" }
+      { "src": "/api", "dest": "./src/router/*.js" }
     ]
 }
