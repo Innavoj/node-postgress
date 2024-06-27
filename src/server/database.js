@@ -4,8 +4,7 @@ const { Pool } = pg;
 
 const dotenv = require("dotenv").config();
 
-const POSTGRES_URL="postgres://default:H1jp5KRkXDMe@ep-twilight-recipe-a27ok8ra-pooler.eu-central-1.aws.neon.tech:5432/verceldb?sslmode=require"
-
+const POSTGRES_URL=process.env.POSTGRES_URL;
 const pool = new Pool({
   connectionString: POSTGRES_URL,
 })

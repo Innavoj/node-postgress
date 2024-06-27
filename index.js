@@ -2,15 +2,15 @@ const express = require("express");
 const app = express();
 //const router = express.Router();
 const dotenv = require("dotenv");
-require ('./server/database');
-const apiEntidad  = require('./router/entidadRouter');
-const apiAnimal = require('./router/animalRouter');
-const apiPropietario = require('./router/propietarioRouter');
-const apiConsulta = require('./router/consultaRouter');
-const apiArchivo = require('./router/archivoRouter');
-const apiCita = require('./router/citaRouter');
-const apiMsg = require('./router/msgRouter');
-const apiFactura = require('./router/facturaRouter');
+require ('./src/server/database');
+const apiEntidad  = require('./src/router/entidadRouter');
+const apiAnimal = require('./src/router/animalRouter');
+const apiPropietario = require('./src/router/propietarioRouter');
+const apiConsulta = require('./src/router/consultaRouter');
+const apiArchivo = require('./src/router/archivoRouter');
+const apiCita = require('./src/router/citaRouter');
+const apiMsg = require('./src/router/msgRouter');
+const apiFactura = require('./src/router/facturaRouter');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({ extends: false}));
@@ -28,7 +28,7 @@ app.use(express.json());
 
 
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 app.listen(PORT, () =>  console.log('Servidor WEB Conectado en el puerto ', PORT ));
 
 app.get("/", (req, res) => {
