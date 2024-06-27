@@ -92,4 +92,3 @@ router.get("/propietario", async (req, res) => {
 
 
 module.exports = router;
-//export default router;

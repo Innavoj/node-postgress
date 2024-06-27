@@ -14,6 +14,7 @@ const apiFactura = require('./src/router/facturaRouter');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({ extends: false}));
+app.use(express.json());
 
 app.use('/api', apiEntidad);
 app.use('/api', apiAnimal);
@@ -24,17 +25,15 @@ app.use('/api', apiCita);
 app.use('/api', apiMsg);
 app.use('/api', apiFactura);
 
-app.use(express.json());
 
-
-
-const PORT = process.env.PORT;
-app.listen(PORT, () =>  console.log('Servidor WEB Conectado en el puerto ', PORT ));
 
 app.get("/", (req, res) => {
-    res.send("Servidor esta Ejecutandose");
-  });
+  res.send("Servidor esta Ejecutandose");
+});
+
+ 
+app.listen(process.env.PORT, () =>  console.log('Servidor WEB Conectado en el puerto ', process.env.PORT ));
 
 
-//module.exports = router;
+ 
 module.exports = dotenv;
