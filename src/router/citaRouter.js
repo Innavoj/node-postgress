@@ -27,7 +27,7 @@ router.delete("/cita/:id", async (req, res) => {
     if (rowCount === 0) {
       return res.send("No existe el ID a borrar");
     }
-    return res.send(rows);
+    return res.status(200).json('Success');
   } catch (error) {
     console.log("Error en la API: " + error);
   }
@@ -46,7 +46,7 @@ router.put("/cita/:id", async (req, res) => {
     if (rowCount == 0) {
       return res.status(500).send("Error al Update en la Tabla Cita");
     }
-    return res.status(200).send(" Actualizado correctamente el Id:" + id );
+    return res.status(200).json('Success');
   } catch (error) {
     console.log("Error en la API: " + error);
   }
@@ -64,7 +64,7 @@ router.post("/cita/:propietario_id", async (req, res) => {
     if (rowCount == 0) {
       return res.status(500).send("Error al Insertar en la Tabla Cita");
     }
-    return res.status(200).json(rows);
+    return res.status(200).json('Success');
   } catch (error) {
     console.log("Error en la API: " + error);
   }
