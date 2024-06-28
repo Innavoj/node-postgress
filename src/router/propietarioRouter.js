@@ -8,13 +8,13 @@ router.get("/propietario/:id", async (req, res) => {
     const { id } = req.params;
     const { rows, rowCount } =
       await sql`SELECT * FROM propietario WHERE propietario_id  = ${id};`;
-    // res.send(req.params)
+
     if (rowCount === 0) {
-      return res.send("No existe el Id buscado");
+      return res.status(404).json({ NotFound: rowCount });
     }
-    return res.json(rows);
+    return res.status(200).json({ rows: rows });
   } catch (error) {
-    console.log("Error en la API: " + error);
+    return res.status(500).json({ error: error });
   }
 });
 
@@ -25,11 +25,11 @@ router.delete("/propietario/:id", async (req, res) => {
       await sql`DELETE FROM propietario WHERE propietario_id  = ${id};`;
     // res.send(req.params)
     if (rowCount === 0) {
-      return res.send("No existe el ID a borrar");
+      return res.status(404).json({ NotFound: rowCount });
     }
-    return res.status(200).json('Success');
+    return res.status(200).json({ success: rowCount });
   } catch (error) {
-    console.log("Error en la API: " + error);
+    return res.status(500).json({ error: error });
   }
 });
 
@@ -45,13 +45,13 @@ router.put("/propietario/:id", async (req, res) => {
     const email = req.body.propietario_email;
     const { rows, rowCount } =
       await sql`UPDATE propietario SET propietario_identidad = ${identidad}, propietario_nombre1 = ${nombre1}, propietario_nombre2 = ${nombre2}, propietario_apell1 = ${apell1}, propietario_apell2 = ${apell2}, propietario_telefono = ${telefono}, propietario_email = ${email} WHERE propietario_id = ${id};`;
-    // res.send(req.params)
+
     if (rowCount == 0) {
-      return res.status(500).send("Error al Update en la Tabla Propietario");
+      return res.status(404).json({ NotFound: rowCount });
     }
-    return res.status(200).json('Success');
+    return res.status(200).json({ success: rowCount });
   } catch (error) {
-    console.log("Error en la API: " + error);
+    return res.status(500).json({ error: error });
   }
 });
 
@@ -66,13 +66,13 @@ router.post("/propietario", async (req, res) => {
     const email = req.body.propietario_email;
     const { rows, rowCount } =
       await sql`INSERT INTO propietario VALUES (nextval('seqPropi'), ${identidad}, ${nombre1}, ${nombre2}, ${apell1}, ${apell2}, ${telefono}, ${email});`;
-    // res.send(req.params)
+
     if (rowCount == 0) {
-      return res.status(500).send("Error al Insertar en la Tabla propietario");
+      return res.status(404).json({ NotFound: rowCount });
     }
-    return res.status(200).json('Success');
+    return res.status(200).json({ success: rowCount });
   } catch (error) {
-    console.log("Error en la API: " + error);
+    return res.status(500).json({ error: error });
   }
 });
 
@@ -80,15 +80,12 @@ router.get("/propietario", async (req, res) => {
   try {
     const { rows, rowCount } = await sql`SELECT * FROM propietario;`;
     if (rowCount == 0) {
-        return res.status(400).send("No hay Datos a Mostrar");
-      }
-    res.status(200).json(rows);
-    // console.log(rows)
+      return res.status(404).json({ NotFound: rowCount });
+    }
+    return res.status(200).json({ rows: rows });
   } catch (error) {
-    res.status(500).send("Error en la API: " + error);
+    return res.status(500).json({ error: error });
   }
 });
-
-
 
 module.exports = router;
