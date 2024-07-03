@@ -10,7 +10,7 @@ router.get("/entidad/:id", async (req, res) => {
       await sql`SELECT * FROM veterinaria WHERE veterinaria_id = ${id};`;
 
     if (rowCount === 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
     return res.status(200).json({ rows: rows });
   } catch (error) {
@@ -25,9 +25,9 @@ router.delete("/entidad/:id", async (req, res) => {
       await sql`DELETE FROM veterinaria WHERE veterinaria_id = ${id};`;
 
     if (rowCount === 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
-    return res.status(200).json({ success: rowCount });
+    return res.status(200).json({ status: 'success' });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -43,9 +43,9 @@ router.put("/entidad/:id", async (req, res) => {
       await sql`UPDATE veterinaria SET veterinaria_nombre = ${nombre}, veterinaria_telefono = ${telefono}, veterinaria_direccion = ${direccion} WHERE veterinaria_id = ${id};`;
 
     if (rowCount == 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
-    return res.status(200).json({ success: rowCount });
+    return res.status(200).json({ status: 'success' });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -60,9 +60,9 @@ router.post("/entidad", async (req, res) => {
       await sql`INSERT INTO veterinaria VALUES (nextval('seqVeterinaria'), ${nombre}, ${telefono}, ${direccion});`;
 
     if (rowCount == 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
-    return res.status(200).json({ success: rowCount });
+    return res.status(200).json({ status: 'success' });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -72,7 +72,7 @@ router.get("/entidad", async (req, res) => {
   try {
     const { rows, rowCount } = await sql`SELECT * FROM veterinaria;`;
     if (rowCount == 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
     return res.status(200).json({ rows: rows });
   } catch (error) {

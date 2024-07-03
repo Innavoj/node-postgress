@@ -10,7 +10,7 @@ router.get("/msg/:id", async (req, res) => {
       await sql`SELECT * FROM recordatorio WHERE recordatorio_id = ${id};`;
 
     if (rowCount === 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
     return res.status(200).json({ rows: rows });
   } catch (error) {
@@ -25,9 +25,9 @@ router.delete("/msg/:id", async (req, res) => {
       await sql`DELETE FROM recordatorio WHERE recordatorio_id = ${id};`;
 
     if (rowCount === 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
-    return res.status(200).json({ success: rowCount });
+    return res.status(200).json({ status: 'success' });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -41,9 +41,9 @@ router.put("/msg/:id", async (req, res) => {
       await sql`UPDATE recordatorio SET recordatorio_msg = ${sms} WHERE recordatorio_id = ${id};`;
 
     if (rowCount == 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
-    return res.status(200).json({ success: rowCount });
+    return res.status(200).json({ status: 'success' });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -57,9 +57,9 @@ router.post("/msg/:cita_id", async (req, res) => {
       await sql`INSERT INTO recordatorio VALUES (nextval('seqMsg'), ${cita_id}, ${sms});`;
 
     if (rowCount == 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
-    return res.status(200).json({ success: rowCount });
+    return res.status(200).json({ status: 'success' });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -69,7 +69,7 @@ router.get("/msg", async (req, res) => {
   try {
     const { rows, rowCount } = await sql`SELECT * FROM recordatorio;`;
     if (rowCount == 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
     return res.status(200).json({ rows: rows });
   } catch (error) {

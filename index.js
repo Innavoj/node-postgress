@@ -11,6 +11,7 @@ const apiArchivo = require('./src/router/archivoRouter');
 const apiCita = require('./src/router/citaRouter');
 const apiMsg = require('./src/router/msgRouter');
 const apiFactura = require('./src/router/facturaRouter');
+const apiInventario = require('./src/router/inventarioRouter');
 
 const cors = require("cors");
 
@@ -38,7 +39,7 @@ app.use('/api', apiArchivo);
 app.use('/api', apiCita);
 app.use('/api', apiMsg);
 app.use('/api', apiFactura);
-
+app.use('/api', apiInventario);
 
 
 app.get("/", (req, res) => {

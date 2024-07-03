@@ -10,7 +10,7 @@ router.get("/consulta/:id", async (req, res) => {
       await sql`SELECT * FROM consulta WHERE consulta_id  = ${id};`;
 
     if (rowCount === 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
     return res.status(200).json({ rows: rows });
   } catch (error) {
@@ -25,9 +25,9 @@ router.delete("/consulta/:id", async (req, res) => {
       await sql`DELETE FROM consulta WHERE consulta_id  = ${id};`;
 
     if (rowCount === 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
-    return res.status(200).json({ success: rowCount });
+    return res.status(200).json({ status: 'success' });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -45,9 +45,9 @@ router.put("/consulta/:id", async (req, res) => {
       await sql`UPDATE consulta SET consulta_enfermedad = ${enfermedad}, consulta_tratamiento = ${tratamiento}, consulta_vacunas = ${vacunas}, consulta_cirujias = ${cirujias} WHERE consulta_id = ${id};`;
 
     if (rowCount == 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
-    return res.status(200).json({ success: rowCount });
+    return res.status(200).json({ status: 'success' });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -64,9 +64,9 @@ router.post("/consulta/:animal_id", async (req, res) => {
       await sql`INSERT INTO consulta VALUES (nextval('seqConsulta'), ${animal_id}, ${enfermedad}, ${tratamiento}, ${vacunas}, ${cirujias});`;
 
     if (rowCount == 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
-    return res.status(200).json({ success: rowCount });
+    return res.status(200).json({ status: 'success' });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -76,7 +76,7 @@ router.get("/consulta", async (req, res) => {
   try {
     const { rows, rowCount } = await sql`SELECT * FROM consulta;`;
     if (rowCount == 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
     return res.status(200).json({ rows: rows });
   } catch (error) {

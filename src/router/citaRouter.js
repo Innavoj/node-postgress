@@ -9,7 +9,7 @@ router.get("/cita/:id", async (req, res) => {
     const { rows, rowCount } =
       await sql`SELECT * FROM cita WHERE cita_id  = ${id};`;
     if (rowCount === 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
     return res.status(200).json({ rows: rows });
   } catch (error) {
@@ -24,9 +24,9 @@ router.delete("/cita/:id", async (req, res) => {
       await sql`DELETE FROM cita WHERE cita_id  = ${id};`;
 
     if (rowCount === 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
-    return res.status(200).json({ success: rowCount });
+    return res.status(200).json({ status: 'success' });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -43,9 +43,9 @@ router.put("/cita/:id", async (req, res) => {
       await sql`UPDATE cita SET cita_fecha = ${fecha}, cita_cancelado = ${cancelado}, cita_recordatorio = ${recordatorio} WHERE cita_id = ${id};`;
 
     if (rowCount == 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
-    return res.status(200).json({ success: rowCount });
+    return res.status(200).json({ status: 'success' });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -61,9 +61,9 @@ router.post("/cita/:propietario_id", async (req, res) => {
       await sql`INSERT INTO cita VALUES (nextval('seqCita'), ${propietario_id}, ${fecha}, ${cancelado}, ${recordatorio});`;
 
     if (rowCount == 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
-    return res.status(200).json({ success: rowCount });
+    return res.status(200).json({ status: 'success' });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -73,7 +73,7 @@ router.get("/cita", async (req, res) => {
   try {
     const { rows, rowCount } = await sql`SELECT * FROM cita;`;
     if (rowCount == 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
     return res.status(200).json({ rows: rows });
   } catch (error) {

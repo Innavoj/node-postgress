@@ -10,7 +10,7 @@ router.get("/propietario/:id", async (req, res) => {
       await sql`SELECT * FROM propietario WHERE propietario_id  = ${id};`;
 
     if (rowCount === 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
     return res.status(200).json({ rows: rows });
   } catch (error) {
@@ -25,9 +25,9 @@ router.delete("/propietario/:id", async (req, res) => {
       await sql`DELETE FROM propietario WHERE propietario_id  = ${id};`;
     // res.send(req.params)
     if (rowCount === 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
-    return res.status(200).json({ success: rowCount });
+    return res.status(200).json({ status: 'success' });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -47,9 +47,9 @@ router.put("/propietario/:id", async (req, res) => {
       await sql`UPDATE propietario SET propietario_identidad = ${identidad}, propietario_nombre1 = ${nombre1}, propietario_nombre2 = ${nombre2}, propietario_apell1 = ${apell1}, propietario_apell2 = ${apell2}, propietario_telefono = ${telefono}, propietario_email = ${email} WHERE propietario_id = ${id};`;
 
     if (rowCount == 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
-    return res.status(200).json({ success: rowCount });
+    return res.status(200).json({ status: 'success' });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -68,9 +68,9 @@ router.post("/propietario", async (req, res) => {
       await sql`INSERT INTO propietario VALUES (nextval('seqPropi'), ${identidad}, ${nombre1}, ${nombre2}, ${apell1}, ${apell2}, ${telefono}, ${email});`;
 
     if (rowCount == 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
-    return res.status(200).json({ success: rowCount });
+    return res.status(200).json({ status: 'success' });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -80,7 +80,7 @@ router.get("/propietario", async (req, res) => {
   try {
     const { rows, rowCount } = await sql`SELECT * FROM propietario;`;
     if (rowCount == 0) {
-      return res.status(404).json({ NotFound: rowCount });
+      return res.status(404).json({ status: 'NotFound' });
     }
     return res.status(200).json({ rows: rows });
   } catch (error) {
